@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: lexa-san
- * Date: 25.09.17
- * Time: 11:50
- */
 
 namespace app\Core\Db;
 

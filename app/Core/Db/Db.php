@@ -7,11 +7,10 @@ use app\Core\Db\Config;
 class Db
 {
 
-    /**
-     * @var Db
-     */
+    /* @var Db */
     protected static $_instance;
 
+    /* @var \PDO */
     protected $_dbh;
 
     /**
