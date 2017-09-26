@@ -1,3 +1,6 @@
+<?php
+/* @var \app\View\ViewAbstract $this */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,46 +15,54 @@
 
 <body>
 
-<div class="container">
+<div id="wrapper">
 
-    <div class="content">
-<!--        --><?php //include 'app/tpl/'.$this->viewTemplate ?>
-        <?php $this->parseViewTemplate() ?>
-        <?php var_export($test) ?>
-    </div>
+    <header id="header" class="container">
+        <h3>Шахматные Позиции</h3>
+    </header>
 
-    <div class="main">
+    <div class="container" role="main">
 
-        <div>
+        <div class="row">
+            <div class="col-sm-3 sidebar">
 
-            <table id="chess_grid" class="table table-bordered">
-                <?php for ($i=8; $i>=0; $i--): ?>
-                    <tr>
-                        <?php if ($i == 0): ?>
-                            <th></th>
-                            <?php foreach (str_split('abcdefgh', 1) as $j): ?>
-                                <th><?= $j ?></th>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <th><?= $i ?></th>
-                            <?php foreach (str_split('abcdefgh', 1) as $j): ?>
-                                <td><?= $j, '', $i ?></td>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tr>
-                <?php endfor; ?>
-            </table>
+                <div>
+                    <h4>Позиции</h4>
+                    <!--                --><?php //var_export($chessPositions) ?>
+                    <?php
+                    /* @var app\Model\ChessCollection $collection */
+                    $collection = $this->getViewData('chessPositions');
 
+                    if ($collection instanceof app\Model\ChessCollection && count($collection->getItems())) {
+                        echo '<ul class="nav nav-pills nav-stacked">', PHP_EOL;
+                        /* @var \app\Model\Chess $item */
+                        foreach ($collection->getItems() as $item) {
+                            echo sprintf('<li><a href="%s">%s</a></li>', $item->getLink(), $item->getName()), PHP_EOL;
+                        }
+                        echo '</ul>', PHP_EOL;
+                    }
+
+                    ?>
+                </div>
+
+            </div>
+            <div class="col-sm-9" id="content">
+                <p>content container</p>
+                <?php echo $this->parseViewTemplate() ?>
+            </div>
         </div>
 
     </div>
 
+
 </div>
 
-<footer class="footer">
+<footer id="footer">
     <div class="container">
-        <div class="copyrights pull-left">2017 Aleksei Solovev for Consultant Plus</div>
-        <div class="contacts pull-right">ryoha.san@gmail.com</div>
+        <div class="row">
+            <div class="copyrights col-sm-9">2017 Aleksei Solovev for Consultant Plus</div>
+            <div class="contacts col-sm-3">ryoha.san@gmail.com</div>
+        </div>
     </div>
 </footer>
 

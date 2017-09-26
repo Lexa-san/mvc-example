@@ -43,4 +43,11 @@ class Db
         return static::$_instance;
     }
 
+    /**
+     * @return \PDO
+     */
+    public function getConn()
+    {
+        return $this->_dbh;
+    }
 }

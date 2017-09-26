@@ -4,38 +4,49 @@ namespace app\Controller;
 
 use app\View;
 use app\Core\Request;
+use app\Model\Chess;
+//use app\Model\ChessCollection;
 
 class Index
 {
     /* @var View\ViewInterface */
-    public $view;
+    protected $_view;
 
     function __construct()
     {
-        $this->view = null;
+        $this->_view = null;
     }
 
     function indexAction()
     {
-        $this->view = new View\Index\Index();
-        $this->view->generate();
+        $this->_view = new View\Index\Index();
+        $this->_view->generate();
     }
 
     function viewAction()
     {
-        try {
-
-            // validate
-            $id = (int)Request::getGetParam('id');
-            if (!$id) {
-                throw new \InvalidArgumentException();
-            }
-
-        } catch (\InvalidArgumentException $e) {
-            var_export('InvalidArgumentException');
-        }
-
-        $this->view = new View\Index\View();
-        $this->view->generate();
+//        $this->_view = new View\Index\View();
+//
+//
+//        $positions = (array)$this->_model->loadPositionCollection();
+//        $this->_view->generate([
+//            'positions' => $positions
+//        ]);
+//
+//        try {
+//            // validate
+//            $id = $this->_model->filterId(Request::getGetParam('id'));
+//
+//            if (!$this->_model->validateId($id)) {
+//                throw new \InvalidArgumentException();
+//            }
+//
+//        } catch (\InvalidArgumentException $e) {
+//            $this->_view->setViewData([
+//                'error' => 'InvalidArgumentException'
+//            ]);
+//        }
+//
+//        $this->_view->generate();
     }
 }

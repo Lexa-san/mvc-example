@@ -65,7 +65,7 @@ VALUES (1, 'K'), (2, 'Q'), (3, 'R'), (4, 'N'), (5, 'B'), (6, 'p');
 
 -- TRUNCATE chess_position;
 INSERT INTO chess_position (name)
-    VALUES ('Empty Grid'), ('Initial');
+    VALUES ('Пустая доска'), ('Начальная позиция');
 
 -- TRUNCATE chess_grid;
 INSERT INTO chess_grid (name, horizontal, vertical)
