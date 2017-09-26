@@ -52,4 +52,11 @@ class Index
 
         $this->_view->generate();
     }
+
+    function error404Action()
+    {
+        $this->_view = new View\Index\Index();
+        $this->_view->setViewTemplate('index/error404.php');
+        $this->_view->generate();
+    }
 }

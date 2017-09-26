@@ -2,6 +2,7 @@
 
 namespace app\Core;
 
+use app\Controller\Index;
 use app\Core\Request;
 use app\Core\Exception;
 
@@ -66,6 +67,10 @@ class Router
     {
         header('HTTP/1.1 404 Not Found');
         header('Status: 404 Not Found');
+//        header('Location: ?c=error404');
+        header(sprintf('Location: http://%s%s/index.php?c=index&a=error404', $_SERVER['HTTP_HOST'], rtrim(dirname($_SERVER['PHP_SELF']), '/\\')));
+
+        $controller = (new Index())->error404Action();
         exit;
     }
 

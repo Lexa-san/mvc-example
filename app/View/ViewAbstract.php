@@ -95,4 +95,16 @@ abstract class ViewAbstract
         }
     }
 
+    public function setViewTemplate($tpl)
+    {
+        $this->_viewTemplate = $tpl;
+        return $this;
+    }
+
+    public function setPageTemplate($tpl)
+    {
+        $this->_pageTemplate = $tpl;
+        return $this;
+    }
+
 }
