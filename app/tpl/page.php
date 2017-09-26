@@ -47,7 +47,7 @@
 
             </div>
             <div class="col-sm-9" id="content">
-                <p>content container</p>
+                <!--                <p>content container</p>-->
                 <?php echo $this->parseViewTemplate() ?>
             </div>
         </div>

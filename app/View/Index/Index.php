@@ -7,17 +7,19 @@ use app\Model\ChessCollection;
 
 class Index extends ViewAbstract
 {
-    public $pageTemplate = 'page.php';
-    public $viewTemplate = 'index/index.php';
+    protected $_pageTemplate = 'page.php';
+    protected $_viewTemplate = 'index/index.php';
 
+    /**
+     * @param array  $data
+     * @param string $viewTemplate
+     * @param string $pageTemplate
+     *
+     * @throws \app\Core\Db\NoConfigException
+     */
     function generate($data = [], $viewTemplate = '', $pageTemplate = '')
     {
-        $viewTemplate = ($viewTemplate) ? $viewTemplate : $this->viewTemplate;
-        $pageTemplate = ($pageTemplate) ? $pageTemplate : $this->pageTemplate;
-
-        if (count((array)$data)) {
-            $this->setViewData($data);
-        }
+        parent::generate();
 
         /* @var ChessCollection $chessCollection */
         $chessCollection = (new ChessCollection())->load();

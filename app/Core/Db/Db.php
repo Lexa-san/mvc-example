@@ -17,11 +17,12 @@ class Db
      * Db constructor.
      *
      * @param Config $cfg
+     *
      * @throws \PDOException
      */
     protected function __construct(Config $cfg)
     {
-        $dsn = sprintf('%s:dbname=%s;host=%s', $cfg->getDriver(), $cfg->getSchema(), $cfg->getHost());
+        $dsn        = sprintf('%s:dbname=%s;host=%s', $cfg->getDriver(), $cfg->getSchema(), $cfg->getHost());
         $this->_dbh = new \PDO($dsn, $cfg->getUser(), $cfg->getPassword());
     }
 

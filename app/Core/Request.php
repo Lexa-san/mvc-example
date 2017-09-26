@@ -6,23 +6,23 @@ namespace app\Core;
 class Request
 {
 
-    const REQUEST_TYPE_GET = 'GET';
+    const REQUEST_TYPE_GET  = 'GET';
     const REQUEST_TYPE_POST = 'POST';
-    const REQUEST_TYPE_ANY = 'ANY';
-    
+    const REQUEST_TYPE_ANY  = 'ANY';
+
     public static function getParam($param, $type = self::REQUEST_TYPE_ANY)
     {
         switch ($type) {
             case self::REQUEST_TYPE_GET:
-                $res = isset($_GET[$param]) ? $_GET[$param] : null;
+                $res = isset($_GET[ $param ]) ? $_GET[ $param ] : null;
                 break;
             case self::REQUEST_TYPE_POST:
-                $res = isset($_POST[$param]) ? $_POST[$param] : null;
+                $res = isset($_POST[ $param ]) ? $_POST[ $param ] : null;
                 break;
             case self::REQUEST_TYPE_ANY:
-                $res = isset($_POST[$param]) ? $_POST[$param] : null;
+                $res = isset($_POST[ $param ]) ? $_POST[ $param ] : null;
                 if (!$res) {
-                    $res = isset($_GET[$param]) ? $_GET[$param] : null;
+                    $res = isset($_GET[ $param ]) ? $_GET[ $param ] : null;
                 }
                 break;
         }

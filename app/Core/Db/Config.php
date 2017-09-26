@@ -22,11 +22,13 @@ class Config
 
     /**
      * @param string $driver
+     *
      * @return $this
      */
     public function setDriver($driver)
     {
         $this->_driver = $driver;
+
         return $this;
     }
 
@@ -40,11 +42,13 @@ class Config
 
     /**
      * @param string $host
+     *
      * @return $this
      */
     public function setHost($host)
     {
         $this->_host = $host;
+
         return $this;
     }
 
@@ -58,11 +62,13 @@ class Config
 
     /**
      * @param string $port
+     *
      * @return $this
      */
     public function setPort($port)
     {
         $this->_port = $port;
+
         return $this;
     }
 
@@ -76,11 +82,13 @@ class Config
 
     /**
      * @param string $schema
+     *
      * @return $this
      */
     public function setSchema($schema)
     {
         $this->_schema = $schema;
+
         return $this;
     }
 
@@ -94,11 +102,13 @@ class Config
 
     /**
      * @param string $user
+     *
      * @return $this
      */
     public function setUser($user)
     {
         $this->_user = $user;
+
         return $this;
     }
 
@@ -112,11 +122,13 @@ class Config
 
     /**
      * @param string $password
+     *
      * @return $this
      */
     public function setPassword($password)
     {
         $this->_password = $password;
+
         return $this;
     }
 

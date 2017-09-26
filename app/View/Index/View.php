@@ -1,24 +1,43 @@
 <?php
 
-namespace app\View;
+namespace app\View\Index;
 
-use app\View\ViewInterface;
+use app\View\ViewAbstract;
+use app\Model\Chess;
+use app\Model\ChessCollection;
+use app\Model\Exception;
 
-class View implements ViewInterface
+class View extends ViewAbstract
 {
-    public $pageTemplate = 'page.php';
-    public $viewTemplate = 'index/view.php';
+    public $_pageTemplate = 'page.php';
+    public $_viewTemplate = 'index/view.php';
 
-    function generate($data = null, $viewTemplate = '', $pageTemplate = '')
+    /**
+     * @param array  $data
+     * @param string $viewTemplate
+     * @param string $pageTemplate
+     *
+     * @throws \app\Core\Db\NoConfigException
+     */
+    function generate($data = [], $viewTemplate = '', $pageTemplate = '')
     {
-        $viewTemplate = ($viewTemplate) ? $viewTemplate : $this->viewTemplate;
-        $pageTemplate = ($pageTemplate) ? $pageTemplate : $this->pageTemplate;
+        parent::generate();
 
-        if (is_array($data)) {
-            extract($data);
+        /* @var ChessCollection $chessCollection */
+        $chessCollection = (new ChessCollection())->load();
+        $this->addViewData('chessPositions', $chessCollection);
+
+//        $pos = $this->getViewData('chessPosition');
+        $error = $this->getViewData('error');
+
+        if ($error instanceof Exception\ChessNoModel) {
+            $this->addViewData('hasError', true);
+            $this->addViewData('errorMessage', $error->getMessage());
+
+            $this->_viewTemplate = 'index/view_empty.php';
         }
 
-        include 'app/tpl/'.$pageTemplate;
+        echo $this->parsePageTemplate();
     }
 
 }

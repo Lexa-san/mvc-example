@@ -2,12 +2,12 @@
 ini_set('display_error', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 
-chdir(__DIR__.'/../');
+chdir(__DIR__ . '/../');
 
 // autoload
 spl_autoload_register(function ($class) {
     $base_dir = './';
-    $file = $base_dir . str_replace('\\', '/', $class) . '.php';
+    $file     = $base_dir . str_replace('\\', '/', $class) . '.php';
     if (file_exists($file)) {
         require $file;
     }
@@ -37,7 +37,6 @@ try {
 } catch (Db\NoConfigException $e) {
     die('No Config to connect to the DB.');
 }
-
 
 
 Router::run();

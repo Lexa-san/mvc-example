@@ -27,6 +27,7 @@ final class Registry
         if (isset(self::$_data['config'])) {
             return self::$_data['config'];
         }
+
         return null;
     }
 

@@ -8,7 +8,7 @@ use app\Core\Exception;
 class Router
 {
     const DEFAULT_CONTROLLER = 'Index';
-    const DEFAULT_ACTION = 'index';
+    const DEFAULT_ACTION     = 'index';
 
     public static function run()
     {
@@ -16,15 +16,15 @@ class Router
             $controllerName = self::getController();
 
             $controllerClass = sprintf('app\Controller\%s', $controllerName);
-            $controllerPath = sprintf('app/Controller/%s.php', $controllerName);
+            $controllerPath  = sprintf('app/Controller/%s.php', $controllerName);
             if (!file_exists($controllerPath)) {
                 throw new Exception\Router404();
             }
 
             $controller = new $controllerClass;
 
-            $actionName = self::getAction();
-            $actionMethod = $actionName.'Action';
+            $actionName   = self::getAction();
+            $actionMethod = $actionName . 'Action';
 
             if (!method_exists($controller, $actionMethod)) {
                 throw new Exception\Router404();

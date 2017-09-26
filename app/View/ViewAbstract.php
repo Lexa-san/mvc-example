@@ -5,10 +5,15 @@ namespace app\View;
 
 abstract class ViewAbstract
 {
-    public $pageTemplate;
-    public $viewTemplate;
-    public $viewData = [];
+    protected $_pageTemplate;
+    protected $_viewTemplate;
+    protected $_viewData = [];
 
+    /**
+     * @param array $data
+     *
+     * @return string
+     */
     public function parseViewTemplate($data = [])
     {
         if (is_array($data)) {
@@ -17,10 +22,16 @@ abstract class ViewAbstract
         //extract(array_merge($this->viewData, $data));
 
         ob_start();
-        include 'app/tpl/'.$this->viewTemplate;
+        include 'app/tpl/' . $this->_viewTemplate;
+
         return ob_get_clean();
     }
 
+    /**
+     * @param array $data
+     *
+     * @return string
+     */
     public function parsePageTemplate($data = [])
     {
         if (is_array($data)) {
@@ -28,30 +39,60 @@ abstract class ViewAbstract
         }
 
         ob_start();
-        include 'app/tpl/'.$this->pageTemplate;
+        include 'app/tpl/' . $this->_pageTemplate;
+
         return ob_get_clean();
     }
 
+    /**
+     * @param string $key
+     *
+     * @return array|mixed
+     */
     public function getViewData($key = '')
     {
         if (!$key) {
-            return (array)$this->viewData;
-        } elseif (isset($this->viewData[$key])) {
-            return $this->viewData[$key];
+            return (array)$this->_viewData;
+        } elseif (isset($this->_viewData[ $key ])) {
+            return $this->_viewData[ $key ];
         }
 
     }
 
+    /**
+     * @param array $data
+     */
     public function setViewData(array $data)
     {
-        $this->viewData = $data;
+        $this->_viewData = $data;
     }
 
+    /**
+     * @param $key
+     * @param $val
+     */
     public function addViewData($key, $val)
     {
-        $this->viewData[$key] = $val;
+        $this->_viewData[ $key ] = $val;
     }
 
-    public abstract function generate($data, $viewTemplate, $pageTemplate);
+    /**
+     * @param array  $data
+     * @param string $viewTemplate
+     * @param string $pageTemplate
+     */
+    public function generate($data = [], $viewTemplate = '', $pageTemplate = '')
+    {
+        if ($viewTemplate) {
+            $this->_viewTemplate = $viewTemplate;
+        }
+        if ($pageTemplate) {
+            $this->_pageTemplate = $pageTemplate;
+        }
+
+        if (count((array)$data)) {
+            $this->setViewData($data);
+        }
+    }
 
 }
