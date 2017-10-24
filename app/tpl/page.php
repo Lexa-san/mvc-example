@@ -60,7 +60,7 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="copyrights col-sm-9">2017 Aleksei Solovev for Consultant Plus</div>
+            <div class="copyrights col-sm-9">2017 Aleksei Solovev</div>
             <div class="contacts col-sm-3">ryoha.san@gmail.com</div>
         </div>
     </div>
