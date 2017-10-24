@@ -5,8 +5,7 @@ CREATE DATABASE IF NOT EXISTS asolovev_kplus
 
 USE `asolovev_kplus` ;
 
--- chess_grid
--- DROP TABLE IF EXISTS `chess_grid`;
+DROP TABLE IF EXISTS `chess_grid`;
 CREATE TABLE IF NOT EXISTS `chess_grid` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` CHAR(2) NOT NULL,
@@ -17,8 +16,7 @@ ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `name_UNIQUE` ON `chess_grid` (`name` ASC);
 
--- chess_figure
--- DROP TABLE IF EXISTS `chess_figure`;
+DROP TABLE IF EXISTS `chess_figure`;
 CREATE TABLE IF NOT EXISTS `chess_figure` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` CHAR(1) NOT NULL,
@@ -27,22 +25,19 @@ ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `name_UNIQUE` ON `chess_figure` (`name` ASC);
 
--- chess_position
--- DROP TABLE IF EXISTS `chess_position`;
+DROP TABLE IF EXISTS `chess_position`;
 CREATE TABLE IF NOT EXISTS `chess_position` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- chess_position_plan
--- DROP TABLE IF EXISTS `chess_position_plan`;
+DROP TABLE IF EXISTS `chess_position_plan`;
 CREATE TABLE IF NOT EXISTS `chess_position_plan` (
   `position_id` INT UNSIGNED NOT NULL,
   `grid_id` INT UNSIGNED NOT NULL,
   `figure_id` INT UNSIGNED NOT NULL,
   `color` CHAR(1) NOT NULL,
-  PRIMARY KEY (`position_id`, `grid_id`, `figure_id`),
   CONSTRAINT `fk_chess_position_plan_chess_position`
     FOREIGN KEY (`position_id`) REFERENCES `chess_position` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `fk_chess_position_plan_chess_grid1`
@@ -51,23 +46,16 @@ CREATE TABLE IF NOT EXISTS `chess_position_plan` (
     FOREIGN KEY (`figure_id`) REFERENCES `chess_figure` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
-CREATE TABLE asolovev_kplus.chess_figure
-(
-  id int(10) unsigned PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  name char(1) NOT NULL
-);
-CREATE UNIQUE INDEX name_UNIQUE ON asolovev_kplus.chess_figure (name);
+CREATE UNIQUE INDEX `figure_grid_position_UNIQUE` ON `chess_position_plan` (`position_id`, `grid_id`, `figure_id`);
 
+INSERT INTO chess_figure (id, name)
+VALUES (1, 'K'), (2, 'Q'), (3, 'R'), (4, 'N'), (5, 'B'), (6, 'p')
+;
 
--- TRUNCATE chess_figure;
-INSERT INTO chess_figure (name)
-VALUES (1, 'K'), (2, 'Q'), (3, 'R'), (4, 'N'), (5, 'B'), (6, 'p');
-
--- TRUNCATE chess_position;
 INSERT INTO chess_position (name)
-    VALUES ('Пустая доска'), ('Начальная позиция');
+    VALUES ('Пустая доска'), ('Начальная позиция')
+;
 
--- TRUNCATE chess_grid;
 INSERT INTO chess_grid (name, horizontal, vertical)
     VALUES
       ('a8', 1, 8), ('b8', 2, 8), ('c8', 3, 8), ('d8', 4, 8), ('e8', 5, 8), ('f8', 6, 8), ('g8', 7, 8),  ('h8', 8, 8),
@@ -87,11 +75,3 @@ INSERT INTO chess_position_plan (position_id, grid_id, figure_id, color)
       (2, 49, 6, 'w'), (2, 50, 6, 'w'), (2, 51, 6, 'w'), (2, 52, 6, 'w'), (2, 53, 6, 'w'), (2, 54, 6, 'w'), (2, 55, 6, 'w'), (2, 56, 6, 'w'),
       (2, 57, 3, 'w'), (2, 58, 4, 'w'), (2, 59, 5, 'w'), (2, 60, 2, 'w'), (2, 61, 1, 'w'), (2, 62, 5, 'w'), (2, 63, 4, 'w'), (2, 64, 3, 'w')
 ;
-
-
--- COMMIT ;
-
--- SELECT * from chess_figure;
--- SELECT * from chess_position;
--- SELECT * FROM chess_grid;
--- SELECT * FROM chess_position_plan;
