@@ -19,10 +19,3 @@
 4. Тестовые ссылки:
     * Нет фигур - `public/index.php?c=index&a=index&id=1`
     * Начальное положение фигур - `public/index.php?c=index&a=index&id=2`
-
-
-### Проект
-
-* Алексей Соловьев
-* ryoha.san@gmail.com
-* +7 926 596 87 46

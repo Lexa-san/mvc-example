@@ -61,7 +61,7 @@
     <div class="container">
         <div class="row">
             <div class="copyrights col-sm-9">2017 Aleksei Solovev</div>
-            <div class="contacts col-sm-3">ryoha.san@gmail.com</div>
+            <div class="contacts col-sm-3">github.com/Lexa-san</div>
         </div>
     </div>
 </footer>
